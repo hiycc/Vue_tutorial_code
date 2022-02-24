@@ -10,17 +10,26 @@
 </head>
 <body>
   <div id="app">
-    {{message}}
+    {{a}}
   </div>
+  <p v-if="seen">现在你看到我了</p>
+  <button v-bind:disabled="isButtonDisabled">Button</button>
   <script type="text/javascript">
+    seen = false;
+    var data = { a: 1};
+    isButtonDisabled = null;
     var app = new Vue({
       el:'#app',
-      data() {
-        return {
-          message:'abc'
-        }
-      },
+      data: data,
+    })
+
+    console.log(isButtonDisabled)
+    app.$watch('a',function(newValue, oldValue){
+      window.alert('abc')
+      isButtonDisabled = true;
+      seen = false;
     })
   </script>
+  
 </body>
 </html>
