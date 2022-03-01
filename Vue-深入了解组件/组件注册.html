@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../vue.js" type="text/javascript" charset="utf-8"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <component-a></component-a> 
+    <component-b></component-b> 
+  </div>
+  <script type="text/javascript">
+    //通过一个普通的Javascript对象来注册组件
+    var ComponentA = {
+      props:{
+
+      },
+      template:`
+      <h1>componentA</h1>
+      `
+    }
+    var ComponentB = {
+      props:{
+
+      },
+      template:`
+      <h1>componentB</h1>
+      `
+    }
+    var ComponentC = {
+      props:{
+
+      },
+      template:`
+      <h1>componentC</h1>
+      `
+    }
+
+    new Vue({
+      el:'#app',
+      components:{
+        'component-a':ComponentA,
+        'component-b':ComponentB,
+        'component-c':ComponentC
+      }
+    })
+
+  </script>
+  
+</body>
+</html>

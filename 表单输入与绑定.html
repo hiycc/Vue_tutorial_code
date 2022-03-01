@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+  <title>Document</title>
+</head>
+<body>
+  <p>单行输入框：</p>
+  <div id="textinput">
+    <input type="text" v-model="message" placeholder="edit me">
+    <p>Message is: {{message}}</p>
+  </div>
+  <p>多行输入框：</p>
+  <div id="textarea">
+    <p style="white-space: pre-line;">{{message}}</p>
+    <textarea v-model="message" placeholder="add multiple lines" name="" id="" cols="30" rows="10"></textarea>
+  </div>
+  <p>复选框：</p>
+  <div id="checkbox">
+    <input type="checkbox" name="checkbox" id="checkbox1"  v-model="checked">
+    <label for="checkbox1">{{checked}}</label>
+  </div>
+  <p>多个复选框：</p>
+  <div id="multiplecb">
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames }}</span>
+  </div>
+  <p>单选框：</p>
+  <div id="example-4">
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+  </div>
+  <p>选择框：</p>
+  <div id="example-5">
+    <select v-model="selected">
+      <option>请选择</option>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    <span>Selected: {{ selected }}</span>
+  </div>
+  <script type="text/javascript">
+    vm = new Vue({
+      el:'#textinput',
+      data:{
+        message:''
+      }
+    })
+    vm1 = new Vue({
+      el:'#textarea',
+      data:{
+        message:''
+      }
+    })
+    vm2 = new Vue({
+      el:'#checkbox',
+      data:{
+        checked:true,
+      }
+    })
+    new Vue({
+      el: '#multiplecb',
+      data: {
+        checkedNames: []
+      }
+    })
+    new Vue({
+      el:'#rd',
+      data:{
+        picked:''
+      }
+    })
+    new Vue({
+      el: '#example-5',
+      data: {
+        selected: ''
+      }
+    })
+  </script>
+  
+</body>
+</html>

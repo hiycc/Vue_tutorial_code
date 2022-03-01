@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="example">
+    <p>
+      示例1:
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username">
+      </template>
+      <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address">
+      </template>
+      <button @click="changetype">Toggle login tyoe</button>
+    </p>
+    
+    <p>
+      示例2:
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username" key="username-input">
+      </template>
+      <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" key="email-input">
+      </template>
+      <button @click="changetype">Toggle login tyoe</button>
+    </p>
+    
+  </div>
+
+  <script type="text/javascript">
+    vm = new Vue({
+      el:'#example',
+      data:{
+        loginType:'username'
+      },
+      methods: {
+        changetype:function(){
+          if(this.loginType==='username'){
+            this.loginType = 'email'
+          }else{
+            this.loginType = 'username'
+          }
+        }
+      },
+    })
+  </script>
+  
+</body>
+</html>
