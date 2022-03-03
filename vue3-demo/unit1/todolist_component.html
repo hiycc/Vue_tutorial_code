@@ -36,7 +36,9 @@
       `
     });
     app.component('todolist',{
-      props:['items'],
+      props:{
+        items:Array,
+      },
       template:`
       <li v-for='item of items'>{{item}}</li>
       `
