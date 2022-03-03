@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lesson 7</title>
+  <script src="https://unpkg.com/vue@next"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
+
+</head>
+<body>
+  <style>
+    .red{
+      color:red
+    }
+    .green{
+      color:green
+    }
+  </style>
+  <div id="root"></div>
+</body>
+<script>
+  // 生命周期函数：在某一时刻会自动执行的函数
+  const app = Vue.createApp({
+    data(){
+        return {
+          message:'hello world',
+          styleObject:{
+            color:'red',
+            background:'green'
+
+          }
+        }
+    },
+    template:`<div class='red'>{{message}}</div>
+    <div :style='styleObject'>styledemo</div>
+    <demo/>
+    `
+  });
+  app.component('demo',{
+    data(){
+      return {
+        classObject:{
+          green:true
+        }
+      }
+    },
+    template:
+    `<div :class='classObject'>single</div>`
+  })
+
+  const vm = app.mount('#root')
+</script>
+
+</html>
