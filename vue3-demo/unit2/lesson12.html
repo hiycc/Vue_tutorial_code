@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lesson 12</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  //事件修饰符:stop,capture,prevent,self,once,passive
+  //stop:停止冒泡事件
+  //capture:如果发生冒泡事件，优先执行带该修饰符的事件，如果都有该修饰符，则从外而内执行
+  //prevent:用于submit,提交事件不再重载页面
+  //self:只有自身元素才能触发
+  //once:事件只会触发一次
+  //passive:滚动事件会立即触发,不需要等待onScroll完成
+  //修饰符可以串联
+  //<form v-on:submit.prevent="onSubmit"></form>
+
+  const app = Vue.createApp({
+    methods: {
+      handleBtnClick1(){
+        alert(1)
+      },
+      handleBtnClick2(){
+        alert(3)
+      },
+      handleBtnClick(num,event){
+        alert(2)
+        this.counter += num
+      }
+    },
+    data(){
+      return {
+        counter:0
+      }
+    },
+    template:`
+    <div @click.self='handleBtnClick1'>{{counter}}
+      <div @click.capture='handleBtnClick2'>
+        <button @click='handleBtnClick(2,$event)'>button</button>
+      </div>
+    </div>
+    `
+  });
+  app.mount('#root')
+</script>
+
+</html>

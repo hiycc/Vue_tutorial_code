@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lesson 12</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  //按键修饰符:enter,delete,k,3
+  //鼠标修饰符:right,left,middle
+  //精确修饰符:exact
+  //exact:允许你控制由精确的系统修饰符组合触发的事件
+
+  const app = Vue.createApp({
+    methods: {
+      handleInput(event){
+        // console.log(event.code)
+        this.keycode = event.code
+      },
+      handleInputEnter(){
+        alert('entered')
+      },
+      handleMouse(){
+        alert('触发鼠标右键')
+      }
+    },
+    data(){
+      return {
+        keycode:''
+      }
+    },
+    template:`
+    <div @click.right='handleMouse'>你正在点击：{{keycode}}
+      <input @keydown.enter.exact='handleInputEnter'>
+    </div>
+    `
+  });
+  app.mount('#root')
+</script>
+
+</html>

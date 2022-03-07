@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  const app = Vue.createApp({
+    data(){
+      return {
+        msg:1
+      }
+    },
+    methods:{
+      addItem(flag){
+        this.msg += flag
+      }
+    },
+    template:`<Counter :msg='msg' @add-one='addItem'></Counter>`
+  });
+  app.component('Counter',{
+    props:['msg'],
+    //定义可触发的事件
+    emits:['addOne'],
+    methods: {
+      handleClick(){
+        this.$emit('addOne',2)
+      }
+    },
+    template:`
+    <div @click='handleClick'>{{msg}}</div>
+    `
+  })
+  app.mount('#root')
+</script>
+
+</html>
