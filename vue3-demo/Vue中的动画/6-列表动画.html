@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+  <style>
+    .list-item{
+      margin: 10px;
+      display: inline-block;
+    }
+    .v-enter-from{
+      opacity: 0;
+      transform: translateY(30px); 
+    }
+    .v-enter-to{
+      opacity: 1;
+    }
+    .v-move{
+      transition: all .5s ease-in;
+    }
+    .v-enter-active,.v-leave-active{
+      transition: all .5s ease-in;
+    }
+    .v-enter-to,.v-leave-from{
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  const app = Vue.createApp({
+    data(){
+      return {
+        show:false,
+        list:[1,2,3]
+      }
+    },
+    methods: {
+      handleClick(){
+        // this.show = !this.show
+        this.list.unshift(this.list.length +1)
+      }
+    },
+    template:
+    `<div>
+      <transition-group>
+        <span class='list-item' v-for='item in list' :key='item'>{{item}}</span>
+      </transition-group>
+      <button @click='handleClick'>切换</button>
+    </div>
+    `
+  });
+  app.mount('#root')
+</script>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作用域插槽</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  const app = Vue.createApp({
+    template:`
+    <app>
+      <template v-slot={user}>
+        <div>{{user.name}}</div>
+      </template>
+      <template #header>
+          <input/>
+      </template>
+      <template v-slot:footer>
+        <footer>
+          footer
+        </footer>
+      </template>
+    </app>
+    `
+  });
+  app.component('app',{
+    data(){
+      return{
+        user:{
+          name:'abc'
+        }
+      }
+    },
+    template:`
+    <div>
+      <slot v-bind:user='user'></slot>
+      <slot name='header'></slot>
+      <div>content</div>
+      <slot name='footer'></slot>
+    </div>
+    `
+  })
+  app.mount('#root')
+</script>
+
+</html>

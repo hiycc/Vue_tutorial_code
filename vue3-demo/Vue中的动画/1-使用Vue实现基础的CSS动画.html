@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+  <style>
+    @keyframes rightToLeft{
+      0%{
+        transform: translateX(0px);
+      }
+      50%{
+        transform: translateX(100px);
+      }
+      100%{
+        transform: translateX(0px);
+      }
+    }
+    .animation{
+      animation: rightToLeft 3s; 
+    }
+    .transition{
+      transition: 3s background-color ease;
+    }
+    /* .blue{
+      background-color: blue;
+    }
+    .green{
+      background-color: green;
+    } */
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+
+<script>
+  const app = Vue.createApp({
+    data(){
+      return {
+        classObj:{
+          transition:true,
+          animation:false,
+        },
+        styleObj:{
+          background:'blue',
+        }
+      }
+    },
+    methods: {
+      handleClick(){
+        // this.classObj.animation = !this.classObj.animation
+        // this.classObj.blue = !this.classObj.blue
+        // this.classObj.green = !this.classObj.green
+        if(this.styleObj.background==='blue'){
+          this.styleObj.background = 'green'
+        }else{
+          this.styleObj.background = 'blue'
+        }
+      }
+    },
+    template:`
+    <div>
+      <div :class='classObj' :style='styleObj' @click='handleClick'>hello world</div>
+    </div>
+    `
+  });
+  app.mount('#root')
+</script>
+
+</html>

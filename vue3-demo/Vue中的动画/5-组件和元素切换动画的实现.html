@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+  <style>
+    .v-enter-from,.v-leave-to{
+      opacity: 0;
+    }
+    .v-enter-active,.v-leave-active{
+      transition: 1s ease-out;
+    }
+    .v-enter-to,.v-leave-from{
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  const ComponentA = {
+    template:'<div>hello world</div>'
+  }
+  const ComponentB = {
+    template:'<div>bye world</div>'
+  }
+  const app = Vue.createApp({
+    data(){
+      return {
+        show:false,
+        component:'component-a'
+      }
+    },
+    components:{
+      'component-a' : ComponentA,
+      'component-b' : ComponentB
+    },
+    methods: {
+      handleClick(){
+        // this.show = !this.show
+        if(this.component === 'component-a'){
+          this.component = 'component-b'
+        }else{
+          this.component = 'component-a'
+        }
+      }
+    },
+    template:
+    `<div>
+      <h1>单元素切换</h1>
+      <transition mode='out-in' appear>
+        <div v-if='show'>hello world</div>
+        <div v-else>bye world</div>
+      </transition>
+      <h1>单组件切换</h1>
+      <transition mode='out-in' appear>
+        <component :is='component'/>
+      </transition>
+      <button @click='handleClick'>切换</button>
+    </div>
+    `
+  });
+  app.mount('#root')
+</script>
+
+</html>
