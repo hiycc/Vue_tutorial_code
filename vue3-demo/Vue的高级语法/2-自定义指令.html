@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  //directive 自定义指令
+  
+  //注册局部指令
+  const directives = {
+    focus:{
+      mounted(el){
+        el.focus()
+      },
+      beforeMount() {
+        console.log('beforemount')
+      },
+      unmounted() {
+        console.log('unmounted')
+      },
+      beforeUnmount() {
+        console.log('beforeunmount')
+      },
+    }
+  }
+  
+  const app = Vue.createApp({
+    data(){
+      return {
+        hello:true
+      }
+    },
+    directives,
+    //普通操作DOM的方法
+    mounted() {
+      // this.$refs.test.focus()
+    },
+    
+    template:`<input v-if='hello' v-focus/>`
+  });
+  //注册全局指令
+  // app.directive('focus',{
+  //   mounted(el){
+  //     el.focus()
+  //   }
+  // })
+  
+  app.mount('#root')
+</script>
+
+</html>

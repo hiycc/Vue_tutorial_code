@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  //mixin 混入
+  //mixins的data methods优先级比组件的data methods 要低
+  //生命周期函数 先执行mixin的再执行组件的
+  //子组件也需要通过mixins挂载了才能用
+  //组件的自定义属性优先级比mixin高
+  //全局mixin（不推荐使用）
+
+  const m = {
+    data(){
+      return {
+        number:2,
+        abc:3
+      }
+    },
+    created() {
+      console.log('mixin created')
+    },
+    methods: {
+      handleClick(){
+        console.log('click')
+      }
+    },
+  }
+  const app = Vue.createApp({
+    mixins:[m],
+    data(){
+      return {
+        number:1
+      }
+    },
+    created(){
+      console.log('created')
+    },
+    methods:{
+      handleClick(){
+        console.log('abc')
+      }
+    },
+    template:`
+      <div>{{number}}</div>
+      <div>{{abc}}</div>
+      <button @click='handleClick'>点击</button>
+      <child/>
+    `
+  });
+  app.component('child',{
+    // mixins:[m],
+    template:`
+    <div>{{abc}}</div>
+    `
+  })
+  app.mount('#root')
+</script>
+
+</html>
