@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>setup函数使用</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  //ref, reactive 引用的用法
+  const app = Vue.createApp({
+    setup(props,context) {
+      const {ref,reactive,toRefs} = Vue
+      let age = reactive({
+        list:[123]
+      })
+      //ref 用于处理基础类型的响应
+      //reactive 用于处理非基础类型的响应
+      //toRefs  
+      let name = ref('dell');
+      setTimeout(()=>{
+        name.value = 'lee'
+        age.list = [456]
+      },2000)
+      const {list} = toRefs(age)
+      return {
+        name,
+        list
+      }
+    },
+    template:`<div>name:{{name}},age:{{list}}</div>`
+  });
+  app.mount('#root')
+</script>
+
+</html>
