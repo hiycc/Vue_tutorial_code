@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  const app = Vue.createApp({
+    setup(props,context) {
+
+      //懒惰性 lazy
+      //
+      const {ref, watch, reactive, toRefs} = Vue
+
+      const name = ref('dell')
+
+      const nameObj = reactive({
+        name:'dell',
+        engName:'lee'
+      })
+
+      watch(name,(curValue,preValue)=>{
+        console.log(curValue,preValue)
+      })
+
+      watch([()=>nameObj.name,()=>nameObj.engName],([curName,curengName],[preName,preengName])=>{
+        console.log(curName,curengName,preName,preengName)
+      })
+
+      const {engName} = toRefs(nameObj)
+
+      return {
+        name,
+        engName
+      }
+      
+    },
+    template:`
+    <div>Name:{{name}}</div>
+    Name:<input v-model='name'/>
+    <div>engName:{{engName}}</div>
+    engName:<input v-model='engName'/>
+
+    `
+  });
+  app.mount('#root')
+</script>
+
+</html>
