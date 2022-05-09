@@ -16,10 +16,14 @@
   const app = Vue.createApp({
     setup(props, context) {
 
-      const {provide, ref} = Vue
+      const {provide, ref, reactive} = Vue
       
+      const nameObj = reactive({
+        name:'lee'
+      })
       const name = ref('dell');
 
+      provide('nameObj',nameObj)
       provide('name',name)
       provide('changName',(value)=>{
         name.value = value
@@ -47,8 +51,8 @@
       // const changName = ()=>{
       //   name.value = 'lee'
       // }
-
-      const name = inject('name')
+      
+      const {name} = inject('nameObj')
       const changName = inject('changName')
       // onMounted(()=>{
         
