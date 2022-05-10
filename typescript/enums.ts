@@ -1,17 +1,10 @@
-enum direction {
-  Up = 10,
-  Down,
-  Right,
-  Left
-}
-console.log(direction.Up) //0
-console.log(direction[11]) //Down
-
-//string
-enum dir_str {
-  Down,
-  Right,
+const enum direction {
   Up = 'Up',
-  LeftDown = 0
+  Down = 'Down',
+  Right = 'Right',
+  Left = 'Left'
 }
-console.log(dir_str[0])
+const value = 'Up';
+if(value === direction.Up){
+  console.log('go up!!')
+}
