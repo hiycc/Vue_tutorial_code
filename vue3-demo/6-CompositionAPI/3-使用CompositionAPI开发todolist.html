@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  const inputRelativedEffect = ()=>{
+    const {ref} = Vue
+    const inputValue = ref('')
+    const handleInput = (e)=>{
+      inputValue.value = e.target.value
+    }
+    return {
+      inputValue,handleInput
+    }
+  }
+
+  const handleInputRelatived = ()=>{
+    const {reactive} = Vue
+    const list = reactive([])
+    
+    const handleClick = (item)=>{
+      list.push(item)
+    }
+    return {
+      handleClick,list
+    }
+  }
+  const app = Vue.createApp({
+    setup(){
+      const {inputValue, handleInput} = inputRelativedEffect()
+      const {handleClick,list} = handleInputRelatived()
+      
+      return {
+        inputValue,handleInput,
+        handleClick,list
+      }
+    },
+
+    template:`
+      <div>
+        <input :value='inputValue' @input='handleInput'/>
+        <button @click='() => handleClick(inputValue)'>提交</button>
+        <div>{{inputValue}}</div>
+      </div>
+      <ul>
+        <li v-for='(item,index) in list' :key='index'>{{item}}</li>
+      </ul>
+    `
+  });
+  app.mount('#root')
+</script>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  const app = Vue.createApp({
+    setup(props, context) {
+      const {computed, ref, reactive} = Vue
+      const countObj = reactive({
+        count:0
+      })
+      const handleClick = ()=>{
+        countObj.count += 1
+      }
+      const computedCount = computed({
+        get:()=>{
+          return countObj.count + 5
+        },
+        set:(value)=>{
+          countObj.count = 5
+        }
+      })
+      return {
+        countObj,handleClick,computedCount
+      }
+      
+    },
+    template:`<div @click='handleClick'>{{countObj.count}}--{{computedCount}}</div>`
+  });
+  app.mount('#root')
+</script>
+
+</html>

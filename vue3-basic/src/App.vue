@@ -5,14 +5,15 @@
   <h1 v-if="loading">Loading...</h1>
   <h1 v-if="loaded"><img :src="data?.message"></h1>
   <h1>X:{{x}},Y:{{y}}</h1>
-
+  <modal-view />
   <button @click="increase">👍+1</button>
 </template>
 
 <script lang="ts">
-import { computed, reactive, toRefs} from 'vue';
+import { computed, reactive, toRefs, watch} from 'vue';
 import useMousePosition from './hooks/useMousePosition'
 import useURLLoader from './hooks/useURLLoader'
+import ModalView from './components/ModalView.vue'
 interface DataProps {
   count: number;
   double: number;
@@ -24,6 +25,9 @@ interface DogResult {
 }
 export default {
   name: 'App',
+  components:{
+    ModalView
+  },
   setup() {
     // const count = ref(0)
     // const double = computed(() => {
@@ -33,7 +37,10 @@ export default {
     //   count.value++
     // }
     const { position } = useMousePosition()
-    const { loading, loaded, data } = useURLLoader('https://dog.ceo/api/breeds/image/random')
+    const { loading, loaded, data } = useURLLoader<DogResult>('https://dog.ceo/api/breeds/image/random')
+    watch(data, () => {
+      console.log('data:',data.value?.message)
+    })
     const { x, y } = toRefs(position)
     const countData: DataProps = reactive({
       count: 0,
@@ -56,5 +63,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background: #333;
 }
 </style>
