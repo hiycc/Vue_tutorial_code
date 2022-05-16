@@ -9,6 +9,10 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: 'ModalView',
+  props: {
+    isOpen: Boolean
+  },
+  
 
 })
 </script>
